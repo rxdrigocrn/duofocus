@@ -14,7 +14,7 @@ export default function Home() {
 
   return (
     <>
-      <header className="fixed top-0 left-0 w-full px-24 py-5">
+      <header className="fixed top-0 left-0 w-full px-48 py-10">
         <h1 className="text-xl font-bold text-white">DuoFocus</h1>
       </header>
 
@@ -24,37 +24,38 @@ export default function Home() {
             <Image
               src="/logo.svg"
               alt="DuoFocus logo"
-              width={180}
-              height={180}
+              width={200}
+              height={200}
               priority
             />
 
-            <h3 className="text-2xl font-bold mt-4 text-center w-4/5">
+            <h3 className="text-2xl font-bold mt-5 text-center w-4/5">
               {messages[currentMessageIndex]}
             </h3>
 
-            <div className="flex gap-2 mt-2">
+            <p className="text-center mt-4 text-xs  w-1/2">
+              DuoFocus helps you to stay productive and motivated through monitoring your habits.
+            </p>
+
+            <div className="flex gap-2 mt-8">
               {messages.map((_, index) => (
                 <button
                   key={index}
                   onClick={() => setCurrentMessageIndex(index)}
-                  className={`w-2 h-2 rounded-full shadow-md cursor-pointer  transition-colors duration-200 ${index === currentMessageIndex ? "bg-blue-400" : "bg-white"
-                    } hover:bg-blue-200`} 
+                  className={`w-2.5 h-2.5 rounded-full shadow-md cursor-pointer  transition-colors duration-200 ${index === currentMessageIndex ? "bg-indigo-400" : "bg-white"
+                    } hover:bg-indigo-200`} 
                   aria-label={`Selecionar mensagem ${index + 1}`}
                 />
               ))}
             </div>
 
-            <p className="text-center mt-4 text-xs  w-1/2">
-              DuoFocus helps you to stay productive and motivated through monitoring your habits.
-            </p>
           </div>
 
           <div className="flex flex-col gap-4 w-2/3">
             <button className="block bg-blue-500 text-white rounded py-2">
               Get Started
             </button>
-            <button className="bg-white text-blue-500 rounded py-2">
+            <button className="bg-white text-indigo-500 rounded-[8px] py-2 border">
               Login
             </button>
           </div>
@@ -64,7 +65,7 @@ export default function Home() {
           <p className="text-white text-xs">
             By continuing, you agree to our Terms & Privacy Policy
           </p>
-          <p className="text-white text-xs">© 2023 DuoFocus</p>
+          <p className="text-white text-xs">© 2025 DuoFocus</p>
         </footer>
       </div>
     </>
