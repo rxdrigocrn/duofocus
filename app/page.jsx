@@ -50,7 +50,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="flex flex-col gap-4 w-4/5 max-w-sm">
+          <div className="flex flex-col gap-4 w-2/3">
             <button className="block bg-blue-500 text-white rounded py-2">
               Get Started
             </button>
