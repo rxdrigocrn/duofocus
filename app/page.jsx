@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { redirect } from "next/navigation";
 
 export default function Home() {
   const messages = [
@@ -43,7 +44,7 @@ export default function Home() {
                   key={index}
                   onClick={() => setCurrentMessageIndex(index)}
                   className={`w-2.5 h-2.5 rounded-full shadow-md cursor-pointer  transition-colors duration-200 ${index === currentMessageIndex ? "bg-indigo-400" : "bg-white"
-                    } hover:bg-indigo-200`} 
+                    } hover:bg-indigo-200`}
                   aria-label={`Selecionar mensagem ${index + 1}`}
                 />
               ))}
@@ -51,11 +52,11 @@ export default function Home() {
 
           </div>
 
-          <div className="flex flex-col gap-4 w-2/3">
-            <button className="block bg-blue-500 text-white rounded py-2">
+          <div className="flex flex-col gap-4 w-1/2">
+            <button onClick={() => redirect("/registro")} className="block bg-blue-500 text-white rounded py-2 cursor-pointer">
               Get Started
             </button>
-            <button className="bg-white text-indigo-500 rounded-[8px] py-2 border">
+            <button onClick={() => redirect("/login")} className="bg-white text-indigo-500 rounded-[8px] py-2 border cursor-pointer  ">
               Login
             </button>
           </div>
