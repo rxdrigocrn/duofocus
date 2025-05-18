@@ -1,71 +1,93 @@
-'use client';
-import React, { useState } from "react";
-import { Dumbbell, Brain, Check } from "lucide-react";
+'use client'
+import React from "react";
+import Header from "@/components/shared/Header";
+import Button from "@/components/shared/Button";
+import TasksTable from "@/components/templates/TasksTable";
+import { useState } from "react";
 
-const TaskForm = ({ type, onSubmit }) => {
-    const [label, setLabel] = useState("");
-    const [daily, setDaily] = useState(false);
+const HomePage = () => {
+    const [activeFilter, setActiveFilter] = useState('all');
+    const [tasks, setTasks] = useState([
+        { label: 'Fazer 30 minutos de cardio', icon: 'dumbbell', completed: false },
+        { label: 'Ler 20 páginas do livro', icon: 'brain', completed: false },
+        { label: 'Fazer exercícios de musculação', icon: 'dumbbell', completed: true },
+        { label: 'Estudar React por 1 hora', icon: 'brain', completed: false },
+    ]);
 
-    const isBody = type === "body";
-    const icon = isBody ? <Dumbbell size={48} className="text-white" /> : <Brain size={48} className="text-white" />;
-    const bgColor = isBody ? "bg-[#FF6B6B]" : "bg-[#4D96FF]";
-    const buttonTextColor = isBody ? "text-[#FF6B6B]" : "text-[#4D96FF]";
-    const iconType = isBody ? "dumbbell" : "brain";
+    const handleFilterChange = (filter) => {
+        setActiveFilter(filter === activeFilter ? 'all' : filter);
+    };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        if (!label.trim()) return;
+    const filteredTasks = activeFilter === 'all'
+        ? tasks
+        : tasks.filter(task => task.icon === activeFilter);
 
-        onSubmit({ label, icon: iconType, daily });
-        setLabel("");
-        setDaily(false);
+    const toggleTaskCompletion = (index) => {
+        const updatedTasks = [...tasks];
+        updatedTasks[index].completed = !updatedTasks[index].completed;
+        setTasks(updatedTasks);
     };
 
     return (
-        <div className="flex items-center justify-center min-h-[700px] px-4">
-            <form
-                onSubmit={handleSubmit}
-                className={`rounded-xl p-12 flex flex-col gap-8 ${bgColor}`}
-                style={{
-                    width: '100%',
-                    maxWidth: 600,
-                    maxHeight: 700,
-                    height: 'auto',
-                }}
-            >
-                <div className="flex items-center gap-4 justify-center text-white text-4xl font-bold">
-                    {icon}
-                    {isBody ? "Body" : "Mind"}
-                </div>
+        <div className="min-h-screen bg-[linear-gradient(135deg,#061131,#091843)]">
+            <div className="flex flex-col lg:flex-row min-h-[calc(100vh-82px)] px-4">
+                {/* Seção Esquerda */}
+                <section className="w-full lg:w-1/2 flex flex-col items-center px-4 py-3 md:px-8 md:py-4 lg:border-r lg:border-r-[3px] lg:border-r-[#1B284E]">
+                    <h1 className="text-xl w-full mb-6 md:mb-10 md:text-2xl font-bold text-white text-center lg:text-left ">
+                        Good morning, Erfon! Be <br className="hidden sm:block" /> consistent. Success is built <br className="hidden sm:block" /> day by day.
+                    </h1>
 
-                <input
-                    type="text"
-                    placeholder="Add a new task..."
-                    value={label}
-                    onChange={(e) => setLabel(e.target.value)}
-                    className="rounded-md border border-white bg-transparent text-white placeholder-white px-6 py-4 text-xl outline-none"
-                />
+                         <TasksTable
+                            title="Minhas Tarefas Diárias"
+                            tasks={filteredTasks}
+                            bgColor="bg-gray-50"
+                            textColor="text-gray-800"
+                            onFilter={handleFilterChange}
+                            activeFilter={activeFilter}
+                            onToggle={toggleTaskCompletion}
+                        />
+ 
+                    <div className="mt-6 lg:absolute lg:bottom-10">
+                        <h3 className="text-white text-lg md:text-xl text-center">
+                            Big changes start with small actions.
+                        </h3>
+                    </div>
+                </section>
 
-                <label className="flex items-center gap-4 text-white text-lg">
-                    <input
-                        type="checkbox"
-                        checked={daily}
-                        onChange={() => setDaily(!daily)}
-                        className="w-7 h-7"
-                    />
-                    Daily task
-                </label>
+                {/* Seção Direita */}
+                <section className="w-full lg:w-1/2 flex flex-col items-center py-8 lg:py-0 lg:justify-center relative">
+                    <div className="lg:absolute lg:top-10 mb-8 lg:mb-0">
+                        <h3 className="text-white text-lg md:text-xl text-center lg:text-left">
+                            Today's progress:
+                        </h3>
+                    </div>
 
-                <button
-                    type="submit"
-                    className="bg-white text-center py-3 rounded-md font-semibold flex items-center justify-center gap-3 text-xl"
-                >
-                    <Check size={24} className={buttonTextColor} />
-                    <span className={buttonTextColor}>Save task</span>
-                </button>
-            </form>
+                    <div className="flex flex-row lg:flex-col gap-4 lg:gap-10 w-full justify-center items-center">
+                        <Button
+                            text="Body"
+                            icon="/bodyWhite.svg"
+                            bgColor="bg-[#FF6B6B]"
+                            className="w-full sm:w-auto px-6"
+                        />
+
+                        <Button
+                            text="Mind"
+                            icon="/mindWhite.svg"
+                            bgColor="bg-[#4D96FF]"
+                            iconSize="w-6 h-6"
+                            className="w-full sm:w-auto px-6"
+                        />
+                    </div>
+
+                    <div className="mt-8 lg:absolute lg:bottom-10 max-w-[250px]">
+                        <h3 className="text-[#9CA3AF] text-lg md:text-xl text-center">
+                            "Every small step brings you closer to your big dream."
+                        </h3>
+                    </div>
+                </section>
+            </div>
         </div>
     );
 };
 
-export default TaskForm;
+export default HomePage;

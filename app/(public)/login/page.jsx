@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form'
 import TextInput from '@/components/shared/TextInput'
 import AuthTemplate from '@/components/templates/AuthTemplate'
 import AuthHeader from '@/components/templates/AuthHeader'
+import { redirect } from 'next/navigation'
 
 const LoginPage = () => {
   const { register, handleSubmit } = useForm()
@@ -42,6 +43,7 @@ const LoginPage = () => {
 
         <button
           type="submit"
+          onClick={() => redirect('/home')}
           className="w-full bg-red-400 text-white py-3 rounded-lg hover:bg-red-500 transition cursor-pointer"
         >
           Login
@@ -52,6 +54,7 @@ const LoginPage = () => {
       <div className="flex flex-col items-center justify-center">
         <button
           type="submit"
+          onClick={() => redirect('/registro')}
           className="w-full bg-transparent outline outline-1 outline-cyan-600 text-cyan-600 py-3 rounded-lg hover:bg-cyan-700 hover:text-white transition cursor-pointer"
         >
           Criar Conta

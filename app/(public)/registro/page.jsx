@@ -4,12 +4,14 @@ import { useForm } from 'react-hook-form'
 import TextInput from '@/components/shared/TextInput'
 import AuthTemplate from '@/components/templates/AuthTemplate'
 import AuthHeader from '@/components/templates/AuthHeader'
+import { redirect } from 'next/navigation'
 
 const RegisterPage = () => {
     const { register, handleSubmit } = useForm()
 
     const onSubmit = (data) => {
         console.log('Register data:', data)
+        redirect('/login')
     }
 
     return (
@@ -52,7 +54,6 @@ const RegisterPage = () => {
             <div className="flex flex-col items-center justify-center">
                 <p className="text-gray-600">
                     Already have an account?
-
                 </p>
                 <a href="/login" className="text-cyan-600 hover:underline ml-2">
                     Login

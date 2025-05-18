@@ -3,7 +3,7 @@ import React from "react";
 const Header = () => {
   return (
     <header className="flex flex-col md:flex-row justify-between items-center px-4 py-3 md:px-8 md:py-4" style={{ borderBottom: '3px solid #1B284E' }}>
-      <div className="flex items-center mb-4 md:mb-0">
+      <div className="flex items-center mb-4 md:mb-0" >
         <img src="/logo.svg" alt="Logo" className="h-8 md:h-[47px] mr-2 md:mr-[10px]" />
         <h1 className="text-xl md:text-2xl font-bold text-white">DuoFocus</h1>
       </div>
