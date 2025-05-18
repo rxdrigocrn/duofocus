@@ -7,33 +7,26 @@ const TaskForm = ({ type, onSubmit }) => {
     const [daily, setDaily] = useState(false);
 
     const isBody = type === "body";
-    const icon = isBody ? <Dumbbell size={48} className="text-white" /> : <Brain size={48} className="text-white" />;
+    const icon = isBody ? <Dumbbell size={28} className="text-white" /> : <Brain size={28} className="text-white" />;
     const bgColor = isBody ? "bg-[#FF6B6B]" : "bg-[#4D96FF]";
     const buttonTextColor = isBody ? "text-[#FF6B6B]" : "text-[#4D96FF]";
-    const iconType = isBody ? "dumbbell" : "brain";
 
     const handleSubmit = (e) => {
         e.preventDefault();
         if (!label.trim()) return;
 
-        onSubmit({ label, icon: iconType, daily });
+        onSubmit({ label, daily });
         setLabel("");
         setDaily(false);
     };
 
     return (
-        <div className="flex items-center justify-center min-h-[700px] px-4">
+        <div className="relative w-full p-4 max-w-[600px] mx-auto">
             <form
                 onSubmit={handleSubmit}
-                className={`rounded-xl p-12 flex flex-col gap-8 ${bgColor}`}
-                style={{
-                    width: '100%',
-                    maxWidth: 600,
-                    maxHeight: 700,
-                    height: 'auto',
-                }}
+                className={`relative rounded-xl p-4 md:p-8 h-auto md:h-[500px] lg:h-[700px] flex flex-col gap-4 md:gap-6 ${bgColor}`}
             >
-                <div className="flex items-center gap-4 justify-center text-white text-4xl font-bold">
+                <div className="flex items-center gap-2 justify-center text-white text-xl md:text-2xl font-semibold">
                     {icon}
                     {isBody ? "Body" : "Mind"}
                 </div>
@@ -43,24 +36,24 @@ const TaskForm = ({ type, onSubmit }) => {
                     placeholder="Add a new task..."
                     value={label}
                     onChange={(e) => setLabel(e.target.value)}
-                    className="rounded-md border border-white bg-transparent text-white placeholder-white px-6 py-4 text-xl outline-none"
+                    className="rounded-md border border-white bg-transparent text-white placeholder-white px-4 py-2 outline-none w-full"
                 />
 
-                <label className="flex items-center gap-4 text-white text-lg">
+                <label className="flex items-center gap-2 text-white text-sm md:text-base">
                     <input
                         type="checkbox"
                         checked={daily}
                         onChange={() => setDaily(!daily)}
-                        className="w-7 h-7"
+                        className="w-4 h-4 md:w-5 md:h-5"
                     />
                     Daily task
                 </label>
 
                 <button
                     type="submit"
-                    className="bg-white text-center py-3 rounded-md font-semibold flex items-center justify-center gap-3 text-xl"
+                    className="bg-white cursor-pointer mt-4 md:mt-0 md:absolute md:bottom-4 w-full md:w-auto md:left-1/2 md:-translate-x-1/2 text-center py-2 rounded-md font-medium flex items-center justify-center gap-2 px-4"
                 >
-                    <Check size={24} className={buttonTextColor} />
+                    <Check size={16} className={buttonTextColor} />
                     <span className={buttonTextColor}>Save task</span>
                 </button>
             </form>
