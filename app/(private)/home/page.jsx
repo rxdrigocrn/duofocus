@@ -29,7 +29,7 @@ const HomePage = () => {
     };
 
     return (
-        <div className="min-h-screen bg-[linear-gradient(135deg,#061131,#091843)]">
+        <div className=" min-h-[calc(100vh-82px)] bg-[linear-gradient(135deg,#061131,#091843)]">
             <div className="flex flex-col lg:flex-row min-h-[calc(100vh-82px)] px-4">
                 {/* Seção Esquerda */}
                 <section className="w-full lg:w-1/2 flex flex-col items-center px-4 py-3 md:px-8 md:py-4 lg:border-r lg:border-r-[3px] lg:border-r-[#1B284E]">
@@ -47,9 +47,9 @@ const HomePage = () => {
                         onToggle={toggleTaskCompletion}
                     />
 
-                    <div className="mt-6 lg:absolute lg:bottom-10">
-                        <h3 className="text-white text-lg md:text-xl text-center">
-                            Big changes start with small actions.
+                    <div className="mt-6 w-full flex justify-end ">
+                        <h3 className="text-white text-xl md:text-2xl font-bold text-right ">
+                            Big changes start with small <br /> actions.
                         </h3>
                     </div>
                 </section>
