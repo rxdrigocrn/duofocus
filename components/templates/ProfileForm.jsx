@@ -42,16 +42,16 @@ const ProfileForm = () => {
     }
 
     return (
-        <div className="w-full max-w-[760px] min-h-[680px] mx-auto my-10 bg-[#111C44] text-white rounded-2xl p-8 shadow-xl">
+        <div className="w-full max-w-[760px] max-h-[680px] mx-auto bg-[#202C4F] text-white rounded-2xl p-8 shadow-xl">
             <div className="flex items-center gap-4 mb-6">
                 <img
                     src="https://via.placeholder.com/60"
                     alt="Avatar"
-                    className="w-16 h-16 rounded-full object-cover border-2 border-white"
+                    className="w-16 h-16 rounded-full object-cover border-2 border-[#6699FF]"
                 />
                 <div>
                     <h2 className="text-xl font-semibold">Erfon Spanos</h2>
-                    <p className="text-sm text-[#6C8CD5]">Premium Member</p>
+                    <p className="text-sm text-[#6699FF]">Premium Member</p>
                 </div>
             </div>
 
@@ -59,7 +59,7 @@ const ProfileForm = () => {
 
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                 <div className="relative">
-                    <TextInput
+                    <TextInput 
                         label="Full Name"
                         name="fullName"
                         placeholder="Seu nome"
@@ -112,8 +112,6 @@ const ProfileForm = () => {
                     </button>
                 </div>
 
-                <hr className="border-[#2A3964] mt-6" />
-
                 <div className="flex gap-4 pt-4">
                     <button
                         type="submit"
@@ -123,11 +121,12 @@ const ProfileForm = () => {
                     </button>
                     <button
                         type="button"
-                        className="flex-1  cursor-pointer border border-[#6C8CD5] text-white rounded-md py-2 hover:bg-white hover:text-[#111C44] transition-all"
+                        className="flex-1  cursor-pointer border border-[#6C8CD5] text-[#6C8CD5] rounded-md py-2 hover:bg-white hover:text-[#111C44] transition-all"
                     >
                         Cancel
                     </button>
                 </div>
+                <hr className="border-[#2A3964] mt-6" />
             </form>
 
             <div className="text-center mt-6">
