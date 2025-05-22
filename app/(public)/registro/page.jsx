@@ -20,33 +20,33 @@ const RegisterPage = () => {
             <form className="space-y-6 mb-10" onSubmit={handleSubmit(onSubmit)}>
                 <TextInput
                     name="name"
-                    label="Nome"
+                    label="Name"
                     type="text"
-                    placeholder="Seu nome completo"
+                    placeholder="Your full name"
                     register={register}
                 />
                 <TextInput
                     name="email"
                     label="E-mail"
                     type="email"
-                    placeholder="seuemail@exemplo.com"
+                    placeholder="youremail@example.com"
                     register={register}
                 />
                 <TextInput
                     name="password"
-                    label="Senha"
+                    label="Password"
                     type="password"
                     placeholder="••••••••"
                     register={register}
                 />
                 <p className="text-sm text-gray-600">
-                    A senha deve ter pelo menos 8 caracteres, uma letra maiúscula, uma letra minúscula, um número e um caractere especial.
+                    Password must be at least 8 characters long and include one uppercase letter, one lowercase letter, one number, and one special character.
                 </p>
                 <button
                     type="submit"
-                    className="w-full bg-cyan-600 text-white py-3 rounded-lg hover:bg-cyan-700 transition"
+                    className="w-full bg-[#6699FF] text-white py-3 rounded-lg hover:bg-[#4466FF] transition cursor-pointer"
                 >
-                    Criar Conta
+                    Sign Up
                 </button>
 
             </form>

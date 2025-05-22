@@ -115,13 +115,13 @@ const ProfileForm = () => {
                 <div className="flex gap-4 pt-4">
                     <button
                         type="submit"
-                        className="flex-1  cursor-pointer bg-[#FF6B6B] hover:bg-[#ff4c4c] text-white rounded-md py-2 transition-all"
+                        className="flex-1  cursor-pointer bg-[#FF6666] hover:bg-[#FF4444] text-white rounded-md py-2 transition-all"
                     >
                         Save Changes
                     </button>
                     <button
                         type="button"
-                        className="flex-1  cursor-pointer border border-[#6C8CD5] text-[#6C8CD5] rounded-md py-2 hover:bg-white hover:text-[#111C44] transition-all"
+                        className="flex-1  cursor-pointer border border-[#6699FF] text-[#6699FF] rounded-md py-2 hover:bg-[#6699FF] hover:text-[#FFFFFF] transition-all"
                     >
                         Cancel
                     </button>

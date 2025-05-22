@@ -21,14 +21,14 @@ const LoginPage = () => {
           name="email"
           label="E-mail"
           type="email"
-          placeholder="Digite seu e-mail"
+          placeholder="Enter your email"
           register={register}
         />
         <TextInput
           name="password"
           label="Senha"
           type="password"
-          placeholder="Digite sua senha"
+          placeholder="******"
           register={register}
         />
 
@@ -44,7 +44,7 @@ const LoginPage = () => {
         <button
           type="submit"
           onClick={() => redirect('/home')}
-          className="w-full bg-red-400 text-white py-3 rounded-lg hover:bg-red-500 transition cursor-pointer"
+          className="w-full bg-[#FF6666] text-white py-3 rounded-lg hover:bg-[#FF4444] transition cursor-pointer"
         >
           Login
         </button>
@@ -55,9 +55,9 @@ const LoginPage = () => {
         <button
           type="submit"
           onClick={() => redirect('/registro')}
-          className="w-full bg-transparent outline outline-1 outline-cyan-600 text-cyan-600 py-3 rounded-lg hover:bg-cyan-700 hover:text-white transition cursor-pointer"
+          className="w-full bg-transparent outline outline-1 outline-[#6699FF] text-[#6699FF] py-3 rounded-lg hover:bg-[#6699FF] hover:text-white transition cursor-pointer"
         >
-          Criar Conta
+          Sign Up
         </button>
       </div>
     </AuthTemplate>

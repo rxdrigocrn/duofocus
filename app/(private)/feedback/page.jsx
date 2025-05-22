@@ -5,6 +5,8 @@ import FeedbackCard from '@/components/templates/FeedbackCard';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import FeedbackTypeCard from '@/components/shared/FeedbackTypeCard';
 import FeedbackText from '@/components/shared/FeedbackText';
+import MedidorDeFelicidade from '@/components/shared/MedidorDeFelicidade';
+import ShareProgressButton from '@/components/shared/ShareProgressButton';
 
 const Feedback = () => {
   return (
@@ -37,7 +39,13 @@ const Feedback = () => {
 
         <FeedbackCard
           title="Happiness Meters"
-          
+          content={
+            <div className='flex flex-col gap-4'> 
+              <MedidorDeFelicidade title="Mind" value={90}/>
+              <MedidorDeFelicidade title="Body" value={80}/>
+              <MedidorDeFelicidade title="Total" value={85}/>
+            </div>
+          }
         />
         
         <FeedbackCard
@@ -45,6 +53,13 @@ const Feedback = () => {
           content={<FeedbackText/>}
         />
 
+          <ShareProgressButton/>
+
+        <div className='text-center mt-2'>
+          <h3 className='text-[#9CA3AF] '>
+            "Consistency builds extraordinary results"
+          </h3>
+        </div>
     </div>
   )
 }

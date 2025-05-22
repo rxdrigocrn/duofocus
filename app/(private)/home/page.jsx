@@ -38,7 +38,7 @@ const HomePage = () => {
                     </h1>
 
                     <TasksTable
-                        title="Minhas Tarefas Diárias"
+                        title="Today's Tasks"
                         tasks={filteredTasks}
                         bgColor="bg-gray-50"
                         textColor="text-gray-800"
