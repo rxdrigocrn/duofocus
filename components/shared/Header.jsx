@@ -10,7 +10,7 @@ const Header = () => {
         </a>
 
       <div className="flex justify-center gap-4 md:gap-8">
-        <a href="#" className="flex items-center gap-1 md:gap-2">
+        <a href="/feedback" className="flex items-center gap-1 md:gap-2">
           <h2 className="text-white text-sm md:text-[16px]">
             Feedback
           </h2>

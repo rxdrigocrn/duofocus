@@ -8,7 +8,7 @@ const TaskForm = ({ type, onSubmit }) => {
 
     const isBody = type === "body";
     const icon = isBody ? <img src="bodyWhite.svg" className="text-white w-[36px]" /> : <img src="mindWhite.svg" className="text-white" />;
-    const bgColor = isBody ? "bg-[#FF6B6B]" : "bg-[#4D96FF]";
+    const bgColor = isBody ? "bg-gradient-to-b from-[#FF6B6B] to-[#C86161]" : "bg-gradient-to-b from-[#4D96FF] to-[#3475D1]";
     const buttonTextColor = isBody ? "text-[#FF6B6B]" : "text-[#4D96FF]";
 
     const handleSubmit = (e) => {
@@ -21,7 +21,7 @@ const TaskForm = ({ type, onSubmit }) => {
     };
 
     return (
-        <div className="relative w-full p-4 max-w-[600px] mx-auto">
+        <div className="relative w-full p-4 max-w-[500px] mx-auto">
             <form
                 onSubmit={handleSubmit}
                 className={`relative rounded-xl p-4 md:p-8 h-auto md:h-[500px] lg:h-[500px] flex flex-col gap-4 md:gap-6 ${bgColor}`}
@@ -51,7 +51,7 @@ const TaskForm = ({ type, onSubmit }) => {
 
                 <button
                     type="submit"
-                    className="bg-white cursor-pointer mt-4 md:mt-0 md:absolute md:bottom-4 w-full md:w-auto md:left-1/2 md:-translate-x-1/2 text-center py-2 rounded-md font-medium flex items-center justify-center gap-2 px-4"
+                    className="bg-white cursor-pointer mt-4 md:mt-0 md:absolute md:bottom-8 w-full md:w-auto md:left-1/2 md:-translate-x-1/2 text-center py-2 rounded-md font-medium flex items-center justify-center gap-2 px-4"
                 >
                     <Check size={16} className={buttonTextColor} />
                     <span className={buttonTextColor}>Save task</span>

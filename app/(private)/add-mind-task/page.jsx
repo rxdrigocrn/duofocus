@@ -9,7 +9,7 @@ const AddMindTaskPage = () => {
     };
 
     return (
-        <div className="flex items-center justify-center min-h-[calc(100vh-82px)]">
+        <div className="flex items-center justify-center min-h-[calc(100vh-82px)] bg-[url('/mindBg.svg')] bg-cover bg-center">
             <TaskForm
                 type="mind"
                 onSubmit={handleSubmit}
