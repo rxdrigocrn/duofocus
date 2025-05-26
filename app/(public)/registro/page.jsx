@@ -51,7 +51,7 @@ const RegisterPage = () => {
 
             </form>
 
-            <div className="flex flex-col items-center justify-center">
+            <div className="flex flex-col items-center justify-center mt-[-14px]">
                 <p className="text-gray-600">
                     Already have an account?
                 </p>
