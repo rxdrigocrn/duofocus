@@ -8,9 +8,9 @@ import { Pencil, Eye, EyeOff } from 'lucide-react'
 import ModalDeletarConta from '../shared/ModalDeleteAccount'
 
 const schema = z.object({
-    fullName: z.string().min(2, 'Nome é obrigatório'),
-    email: z.string().email('Email inválido'),
-    password: z.string().min(6, 'Mínimo de 6 caracteres'),
+    fullName: z.string().min(2, 'Name is obrigatory'),
+    email: z.string().email('Invalid email'),
+    password: z.string().min(6, 'Minimum 6 characters'),
 })
 
 const ProfileForm = () => {
@@ -33,7 +33,7 @@ const ProfileForm = () => {
 
 
     const handleDelete = () => {
-        console.log('Conta deletada!')
+        console.log('Account deleted!')
         setShowModal(false)
     }
 
@@ -80,7 +80,7 @@ const ProfileForm = () => {
                     <TextInput
                         label="Email Address"
                         name="email"
-                        placeholder="Seu email"
+                        placeholder="Your email"
                         register={register}
                         readOnly={!editEmail}
                         error={errors.email?.message}
@@ -99,7 +99,7 @@ const ProfileForm = () => {
                         label="Password"
                         name="password"
                         type={showPassword ? 'text' : 'password'}
-                        placeholder="Sua senha"
+                        placeholder="Your password"
                         register={register}
                         error={errors.password?.message}
                     />
