@@ -6,7 +6,7 @@ const TaskForm = ({ type, onSubmit }) => {
     const [label, setLabel] = useState("");
     const [daily, setDaily] = useState(false);
 
-    const isBody = type === "body";
+    const isBody = type === "CORPO";
     const icon = isBody ? <img src="bodyWhite.svg" className="text-white w-[36px]" /> : <img src="mindWhite.svg" className="text-white" />;
     const bgColor = isBody ? "bg-gradient-to-b from-[#FF6B6B] to-[#C86161]" : "bg-gradient-to-b from-[#4D96FF] to-[#3475D1]";
     const buttonTextColor = isBody ? "text-[#FF6B6B]" : "text-[#4D96FF]";
@@ -15,7 +15,7 @@ const TaskForm = ({ type, onSubmit }) => {
         e.preventDefault();
         if (!label.trim()) return;
 
-        onSubmit({ label, daily });
+        onSubmit({ label, daily, type});
         setLabel("");
         setDaily(false);
     };
