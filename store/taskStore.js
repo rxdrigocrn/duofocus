@@ -1,13 +1,13 @@
 import { fetchAll, fetchOne } from '@/services/apiServices';
 import { create } from 'zustand';
 
-const useTaskStore = create((set) => ({
+export const useTaskStore = create((set) => ({
     tasks: [],
     taskSelecionada: null,
     loading: false,
     error: null,
 
-    fetchAll: async () => {
+    fetchAllTasks: async () => {
         set({ loading: true, error: null });
         try {
             const res = await fetchAll('/tasks');
@@ -19,7 +19,7 @@ const useTaskStore = create((set) => ({
         }
     },
 
-    fetchById: async (id) => {
+    fetchByIdTasks: async (id) => {
         set({ loading: true, error: null });
         try {
             const res = await fetchOne(`/tasks`, id);
@@ -34,4 +34,3 @@ const useTaskStore = create((set) => ({
     clearTaskSelecionada: () => set({ taskSelecionada: null }),
 }));
 
-export default useTaskStore;

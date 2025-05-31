@@ -2,12 +2,18 @@
 
 import React from 'react';
 import TaskForm from '@/components/templates/TaskForm';
+import { toast } from 'react-toastify';
 import { createItem } from '@/services/apiServices';
 
 const AddBodyTaskPage = () => {
 
     const handleSubmit = async (task) => {
-        await createItem("/tasks", task)
+        try {
+            await createItem("/tasks", task);
+            toast.success("Tarefa criada com sucesso!");
+        } catch (error) {
+            toast.error("Erro ao criar tarefa.");
+        }
     };
 
     return (

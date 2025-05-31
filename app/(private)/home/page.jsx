@@ -1,18 +1,18 @@
 'use client'
-import React from "react";
+import React, { useEffect } from "react";
 import Button from "@/components/shared/Button";
 import TasksTable from "@/components/templates/TasksTable";
 import { redirect } from "next/navigation";
 import { useState } from "react";
+import { useTaskStore } from "@/store/taskStore";
 
 const HomePage = () => {
     const [activeFilter, setActiveFilter] = useState('all');
-    const [tasks, setTasks] = useState([
-        { label: 'Fazer 30 minutos de cardio', icon: 'dumbbell', completed: false },
-        { label: 'Ler 20 páginas do livro', icon: 'brain', completed: false },
-        { label: 'Fazer exercícios de musculação', icon: 'dumbbell', completed: true },
-        { label: 'Estudar React por 1 hora', icon: 'brain', completed: false },
-    ]);
+    const { tasks, fetchAllTasks } = useTaskStore();
+
+    useEffect(() => {
+        fetchAllTasks();
+    }, []);
 
     const handleFilterChange = (filter) => {
         setActiveFilter(filter === activeFilter ? 'all' : filter);
