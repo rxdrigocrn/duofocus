@@ -18,8 +18,18 @@ export default function AuthSlider() {
   }, [])
 
   return (
-    <div className="relative w-[90%] h-[40%] transition-all duration-700 ease-in-out flex items-center justify-center">
-      <div className="w-full h-full">{slides[currentIndex]}</div>
+    <div className="relative w-[90%] h-[40%] flex items-center justify-center overflow-hidden">
+      {slides.map((slide, index) => (
+        <div
+          key={index}
+          className={`
+            absolute w-full h-full transition-opacity duration-800 ease-in-out
+            ${index === currentIndex ? 'opacity-100' : 'opacity-0 pointer-events-none'}
+          `}
+        >
+          {slide}
+        </div>
+      ))}
       <DotNavigation currentIndex={currentIndex} setCurrentIndex={setCurrentIndex} />
     </div>
   )

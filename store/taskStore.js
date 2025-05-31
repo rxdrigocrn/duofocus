@@ -1,4 +1,5 @@
-import { fetchAll, fetchOne } from '@/services/apiServices';
+import { fetchAll, fetchOne, toggleItem } from '@/services/apiServices';
+import { datetimeRegex } from 'zod';
 import { create } from 'zustand';
 
 export const useTaskStore = create((set) => ({
@@ -10,8 +11,7 @@ export const useTaskStore = create((set) => ({
     fetchAllTasks: async () => {
         set({ loading: true, error: null });
         try {
-            const res = await fetchAll('/tasks');
-            const data = await res.json();
+            const data = await fetchAll('/tasks');
             console.log("ALL DATA", data)
             set({ tasks: data, loading: false });
         } catch (err) {
@@ -19,17 +19,39 @@ export const useTaskStore = create((set) => ({
         }
     },
 
-    fetchByIdTasks: async (id) => {
+
+    fetchById: async (id) => {
         set({ loading: true, error: null });
         try {
-            const res = await fetchOne(`/tasks`, id);
-            const data = await res.json();
+            const data = await fetchOne(`/tasks`, id);
             console.log("ONE DATA", data)
             set({ taskSelecionada: data, loading: false });
         } catch (err) {
             set({ error: 'Erro ao buscar tarefa por ID', loading: false });
         }
     },
+
+
+    handleCompleteTask: async (id, completed) => {
+        set({ loading: true, error: null });
+        try {
+            const updatedTask = await toggleItem(`/tasks/${id}/completed`, { completed });
+
+            // Atualiza na store o status da tarefa alterada
+            set((state) => ({
+                tasks: state.tasks.map((task) =>
+                    task.id === id ? { ...task, completed: updatedTask.completed } : task
+                ),
+                loading: false
+            }));
+        } catch (err) {
+            console.error(err);
+            set({ error: 'Erro ao atualizar tarefa', loading: false });
+        }
+    },
+
+
+
 
     clearTaskSelecionada: () => set({ taskSelecionada: null }),
 }));

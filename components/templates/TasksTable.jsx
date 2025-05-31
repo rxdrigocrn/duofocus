@@ -1,6 +1,8 @@
 import React from 'react'
+import useTaskStore from '@/store/taskStore';
 
 const TasksTable = ({ title, tasks, bgColor = 'bg-white', textColor = 'text-gray-800', onFilter, activeFilter, onToggle }) => {
+    const { handleCompleteTask } = useTaskStore();
 
     const gradientBackground =
         activeFilter === 'dumbbell'
@@ -40,11 +42,10 @@ const TasksTable = ({ title, tasks, bgColor = 'bg-white', textColor = 'text-gray
                                     type="checkbox"
                                     className="w-4 h-4 md:w-5 md:h-5 appearance-none border border-gray-300 rounded bg-transparent checked:bg-white checked:border-white checked:before:content-['✔'] checked:before:text-black checked:before:text-xs checked:before:flex checked:before:items-center checked:before:justify-center transition duration-300"
                                     checked={task.completed}
-                                    onChange={() => onToggle(index)}
-                                    readOnly
+                                    onChange={() => handleCompleteTask(task.id, !task.completed)}
                                 />
                                 <span className={`text-sm transition-colors duration-300 ${task.completed ? 'line-through text-gray-400' : activeFilter === task.icon ? 'text-white' : 'text-gray-700'}`}>
-                                    {task.label}
+                                    {task.description}
                                 </span>
                             </label>
                             <span className="text-gray-500">

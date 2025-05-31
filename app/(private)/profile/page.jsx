@@ -7,7 +7,7 @@ const ProfilePage = () => {
       <div className="w-full max-w-[760px]">
         <div className="mb-4 flex flex-col gap-2">
           <h3 className="text-white text-2xl font-semibold">My Account</h3>
-          <p className="text-[#6C8CD5] text-sm mb-5">
+          <p className="text-[#6699FF] text-sm mb-5">
             Manage your personal information
           </p>
         </div>

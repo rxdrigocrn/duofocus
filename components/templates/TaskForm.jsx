@@ -15,7 +15,7 @@ const TaskForm = ({ type, onSubmit }) => {
         e.preventDefault();
         if (!label.trim()) return;
 
-        onSubmit({ label, daily, type});
+        onSubmit({ description: label, daily, type, date: new Date().toISOString() });
         setLabel("");
         setDaily(false);
     };
