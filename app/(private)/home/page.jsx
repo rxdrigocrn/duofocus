@@ -3,15 +3,15 @@ import React, { useEffect, useState } from "react";
 import Button from "@/components/shared/Button";
 import TasksTable from "@/components/templates/TasksTable";
 import { redirect } from "next/navigation";
-import useTaskStore from "@/store/taskStore";
+import { useTaskStore } from "@/store/taskStore";
 
 const HomePage = () => {
     const [activeFilter, setActiveFilter] = useState('all');
-    const { fetchAll, tasks, loading, error } = useTaskStore();
+    const { fetchAllTasks, tasks, loading, error } = useTaskStore();
     const [tasksWithIcons, setTasksWithIcons] = useState([]);
 
     useEffect(() => {
-        fetchAll();
+        fetchAllTasks();
     }, []);
 
     useEffect(() => {
@@ -36,7 +36,7 @@ const HomePage = () => {
         setTasksWithIcons(updatedTasks);
     };
 
- 
+
 
     return (
         <div className="min-h-[calc(100vh-82px)] bg-[linear-gradient(135deg,#061131,#091843)]">

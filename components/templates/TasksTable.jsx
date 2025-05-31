@@ -1,5 +1,5 @@
 import React from 'react'
-import useTaskStore from '@/store/taskStore';
+import { useTaskStore } from '@/store/taskStore';
 
 const TasksTable = ({ title, tasks, bgColor = 'bg-white', textColor = 'text-gray-800', onFilter, activeFilter, onToggle }) => {
     const { handleCompleteTask } = useTaskStore();
