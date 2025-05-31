@@ -1,4 +1,3 @@
-'use client';
 
 import React from 'react';
 import TaskForm from '@/components/templates/TaskForm';

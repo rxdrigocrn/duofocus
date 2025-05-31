@@ -1,39 +1,49 @@
 'use client'
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Button from "@/components/shared/Button";
 import TasksTable from "@/components/templates/TasksTable";
 import { redirect } from "next/navigation";
-import { useState } from "react";
+import useTaskStore from "@/store/taskStore";
 
 const HomePage = () => {
     const [activeFilter, setActiveFilter] = useState('all');
-    const [tasks, setTasks] = useState([
-        { label: 'Fazer 30 minutos de cardio', icon: 'dumbbell', completed: false },
-        { label: 'Ler 20 páginas do livro', icon: 'brain', completed: false },
-        { label: 'Fazer exercícios de musculação', icon: 'dumbbell', completed: true },
-        { label: 'Estudar React por 1 hora', icon: 'brain', completed: false },
-    ]);
+    const { fetchAll, tasks, loading, error } = useTaskStore();
+    const [tasksWithIcons, setTasksWithIcons] = useState([]);
+
+    useEffect(() => {
+        fetchAll();
+    }, []);
+
+    useEffect(() => {
+        const mappedTasks = tasks.map(task => ({
+            ...task,
+            icon: task.type === 'CORPO' ? 'dumbbell' : 'brain'
+        }));
+        setTasksWithIcons(mappedTasks);
+    }, [tasks]);
 
     const handleFilterChange = (filter) => {
         setActiveFilter(filter === activeFilter ? 'all' : filter);
     };
 
     const filteredTasks = activeFilter === 'all'
-        ? tasks
-        : tasks.filter(task => task.icon === activeFilter);
+        ? tasksWithIcons
+        : tasksWithIcons.filter(task => task.icon === activeFilter);
 
     const toggleTaskCompletion = (index) => {
-        const updatedTasks = [...tasks];
+        const updatedTasks = [...tasksWithIcons];
         updatedTasks[index].completed = !updatedTasks[index].completed;
-        setTasks(updatedTasks);
+        setTasksWithIcons(updatedTasks);
     };
 
+ 
+
     return (
-        <div className=" min-h-[calc(100vh-82px)] bg-[linear-gradient(135deg,#061131,#091843)]">
+        <div className="min-h-[calc(100vh-82px)] bg-[linear-gradient(135deg,#061131,#091843)]">
             <div className="flex flex-col lg:flex-row min-h-[calc(100vh-82px)] px-4">
                 {/* Seção Esquerda */}
                 <section className="w-full lg:w-1/2 flex flex-col items-center px-4 py-3 md:px-8 md:py-4 lg:border-r lg:border-r-[3px] lg:border-r-[#1B284E]">
-                    <h1 className="text-xl w-full mb-6 md:mb-10 md:text-2xl font-bold text-white text-center lg:text-left ">
+                    <h1 className="text-xl w-full mb-6 md:mb-10 md:text-2xl font-bold text-white text-center lg:text-left">
                         Good morning, Erfon! Be <br className="hidden sm:block" /> consistent. Success is built <br className="hidden sm:block" /> day by day.
                     </h1>
 
@@ -47,8 +57,8 @@ const HomePage = () => {
                         onToggle={toggleTaskCompletion}
                     />
 
-                    <div className="mt-6 w-full flex justify-end ">
-                        <h3 className="text-white text-xl md:text-2xl font-bold text-right ">
+                    <div className="mt-6 w-full flex justify-end">
+                        <h3 className="text-white text-xl md:text-2xl font-bold text-right">
                             Big changes start with small <br /> actions.
                         </h3>
                     </div>
@@ -69,7 +79,6 @@ const HomePage = () => {
                                 icon="/bodyWhite.svg"
                                 bgColor="bg-[#FF6B6B]"
                                 className="w-full sm:w-auto px-6"
-
                             />
                         </div>
 

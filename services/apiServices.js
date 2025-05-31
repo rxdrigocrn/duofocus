@@ -24,3 +24,7 @@ export const deleteItem = async (resource, id) => {
 export const fetchData = async (url) => {
     return await apiFetch("GET", url);
 };
+
+export const toggleItem = async (resource, data) => {
+    return await apiFetch("PATCH", `${resource}`, data);
+};
