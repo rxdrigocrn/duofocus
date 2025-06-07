@@ -11,7 +11,7 @@ export const useTaskStore = create((set) => ({
     fetchAllTasks: async () => {
         set({ loading: true, error: null });
         try {
-            const data = await fetchAll('/tasks');
+            const data = await fetchAll('/tasks/me');
             console.log("ALL DATA", data)
             set({ tasks: data, loading: false });
         } catch (err) {

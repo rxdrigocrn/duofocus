@@ -4,14 +4,27 @@ import { useForm } from 'react-hook-form'
 import TextInput from '@/components/shared/TextInput'
 import AuthTemplate from '@/components/templates/AuthTemplate'
 import AuthHeader from '@/components/templates/AuthHeader'
-import { redirect } from 'next/navigation'
+import { useRouter } from 'next/navigation'
+import axios from 'axios'
+import { API_BASE_URL } from '@/lib/axios/api'
 
 const LoginPage = () => {
   const { register, handleSubmit } = useForm()
+  const router = useRouter()
 
-  const onSubmit = (data) => {
-    console.log('Register data:', data)
-  }
+  const onSubmit = async (data) => {
+    try {
+      const res = await axios.post(`${API_BASE_URL}/auth/login`, data, {
+        headers: { 'Content-Type': 'application/json' },
+      });
+
+      sessionStorage.setItem('token', res.data.token); // salva o token
+      router.push('/home');
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
 
   return (
     <AuthTemplate title="Cadastro">
@@ -25,8 +38,8 @@ const LoginPage = () => {
           register={register}
         />
         <TextInput
-          name="password"
-          label="Senha"
+          name="senha"
+          label="Password"
           type="password"
           placeholder="******"
           register={register}
@@ -43,7 +56,6 @@ const LoginPage = () => {
 
         <button
           type="submit"
-          onClick={() => redirect('/home')}
           className="w-full bg-[#FF6666] text-white py-3 rounded-lg hover:bg-[#FF4444] transition cursor-pointer"
         >
           Login

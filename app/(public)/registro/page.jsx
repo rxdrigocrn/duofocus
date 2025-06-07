@@ -4,14 +4,27 @@ import { useForm } from 'react-hook-form'
 import TextInput from '@/components/shared/TextInput'
 import AuthTemplate from '@/components/templates/AuthTemplate'
 import AuthHeader from '@/components/templates/AuthHeader'
-import { redirect } from 'next/navigation'
+import { API_BASE_URL } from '@/lib/axios/api'
+import { useRouter } from 'next/navigation'
+
+import axios from 'axios'
 
 const RegisterPage = () => {
     const { register, handleSubmit } = useForm()
+    const router = useRouter()
 
-    const onSubmit = (data) => {
-        console.log('Register data:', data)
-        redirect('/login')
+    const onSubmit = async (data) => {
+        try {
+            const res = await axios.post(`${API_BASE_URL}/auth/register`, data, {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+            console.log(res.data);
+            router.push('/login');
+        } catch (err) {
+            console.log(err);
+        }
     }
 
     return (
@@ -19,7 +32,7 @@ const RegisterPage = () => {
             <AuthHeader title="Welcome" subtitle="Please enter your details" />
             <form className="space-y-6 mb-10" onSubmit={handleSubmit(onSubmit)}>
                 <TextInput
-                    name="name"
+                    name="nome"
                     label="Name"
                     type="text"
                     placeholder="Your full name"
@@ -33,7 +46,7 @@ const RegisterPage = () => {
                     register={register}
                 />
                 <TextInput
-                    name="password"
+                    name="senha"
                     label="Password"
                     type="password"
                     placeholder="••••••••"
