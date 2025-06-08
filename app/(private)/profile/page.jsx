@@ -34,7 +34,11 @@ const ProfilePage = () => {
   }, [router]);
 
   if (!user) {
-    return <p className="text-white text-center">Carregando informações...</p>;
+    return (
+      <div className="min-h-[calc(100vh-82px)] flex flex-col items-center justify-between py-10 px-4">
+        <p className="text-white text-center">Carregando informações...</p>;
+      </div>
+    )
   }
 
   return (

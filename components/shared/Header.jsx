@@ -10,6 +10,16 @@ const Header = () => {
         </a>
 
       <div className="flex justify-center gap-4 md:gap-8">
+        <a href="/historico" className="flex items-center gap-1 md:gap-2">
+          <h2 className="text-white text-sm md:text-[16px]">
+            Historic
+          </h2>
+          <img
+            src="/feedback.svg"
+            alt="feedback icon"
+            className="w-8 h-6 md:w-[43.65px] md:h-[32.37px]"
+          />
+        </a>
         <a href="/feedback" className="flex items-center gap-1 md:gap-2">
           <h2 className="text-white text-sm md:text-[16px]">
             Feedback

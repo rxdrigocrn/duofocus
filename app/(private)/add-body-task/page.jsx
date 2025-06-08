@@ -2,24 +2,13 @@
 import React from 'react';
 import TaskForm from '@/components/templates/TaskForm';
 import { toast } from 'react-toastify';
+import { createItem } from '@/services/apiServices';
 
 const AddBodyTaskPage = () => {
     const handleSubmit = async (task) => {
         try {
-            const token = sessionStorage.getItem("token");
+            const response = await createItem("/tasks", task);
 
-            const response = await fetch("http://localhost:8080/api/tasks", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${token}`,
-                },
-                body: JSON.stringify(task),
-            });
-
-            if (!response.ok) {
-                throw new Error(`Erro ${response.status}`);
-            }
 
             toast.success("Tarefa criada com sucesso!");
         } catch (error) {

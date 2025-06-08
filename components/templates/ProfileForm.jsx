@@ -4,9 +4,11 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import TextInput from '../shared/TextInput';
 import { useForm } from 'react-hook-form';
-import { Pencil } from 'lucide-react';
+import { Pencil, LogOut } from 'lucide-react';
 import ModalDeletarConta from '../shared/ModalDeleteAccount';
 import { updateItem } from '@/services/apiServices';
+import { useRouter } from 'next/navigation';
+
 
 const schema = z.object({
     nome: z.string().min(2, 'Name is obrigatory'),
@@ -26,7 +28,7 @@ const ProfileForm = ({ user }) => {
             email: '',
         },
     });
-
+    const router = useRouter();
     const [showModal, setShowModal] = useState(false);
     const [editName, setEditName] = useState(false);
     const [editEmail, setEditEmail] = useState(false);
@@ -63,18 +65,35 @@ const ProfileForm = ({ user }) => {
     };
 
 
+    const handleLogout = () => {
+        sessionStorage.removeItem('userId');
+        sessionStorage.removeItem('token');
+        router.push('/login');
+    };
+
+
     return (
         <div className="w-full max-w-[760px] max-h-[680px] mx-auto bg-[#202C4F] text-white rounded-2xl p-8 shadow-xl">
-            <div className="flex items-center gap-4 mb-6">
-                <img
-                    src="https://via.placeholder.com/60"
-                    alt="Avatar"
-                    className="w-16 h-16 rounded-full object-cover border-2 border-[#6699FF]"
-                />
-                <div>
-                    <h2 className="text-xl font-semibold">{user.nome}</h2>
-                    <p className="text-sm text-[#6699FF]">Premium Member</p>
+            <div className="flex items-center justify-between gap-4 mb-6">
+                <div className="flex items-center gap-4">
+                    <img
+                        src="https://via.placeholder.com/60"
+                        alt="Avatar"
+                        className="w-16 h-16 rounded-full object-cover border-2 border-[#6699FF]"
+                    />
+                    <div>
+                        <h2 className="text-xl font-semibold">{user.nome}</h2>
+                        <p className="text-sm text-[#6699FF]">Premium Member</p>
+                    </div>
                 </div>
+                <button
+                    type="button"
+                    className="cursor-pointer bg-[#FF6666] hover:bg-[#FF4444] text-white rounded-md py-2 px-4 transition-all flex items-center gap-2"
+                    onClick={handleLogout}
+                >
+                    <LogOut size={18} />
+                    Logout
+                </button>
             </div>
 
             <hr className="border-[#2A3964] mb-6" />
@@ -137,6 +156,9 @@ const ProfileForm = ({ user }) => {
                         </button>
                     </div>
                 )}
+
+
+
 
 
                 <hr className="border-[#2A3964] mt-6" />
