@@ -33,7 +33,6 @@ const Feedback = () => {
             />
           </div>
         }
-
       />
 
       <FeedbackCard

@@ -18,7 +18,8 @@ const LoginPage = () => {
         headers: { 'Content-Type': 'application/json' },
       });
 
-      sessionStorage.setItem('token', res.data.token); // salva o token
+      sessionStorage.setItem('token', res.data.token);
+      sessionStorage.setItem('userId', res.data.id);
       router.push('/home');
     } catch (err) {
       console.log(err);

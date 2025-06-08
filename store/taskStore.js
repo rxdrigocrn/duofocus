@@ -37,7 +37,6 @@ export const useTaskStore = create((set) => ({
         try {
             const updatedTask = await toggleItem(`/tasks/${id}/completed`, { completed });
 
-            // Atualiza na store o status da tarefa alterada
             set((state) => ({
                 tasks: state.tasks.map((task) =>
                     task.id === id ? { ...task, completed: updatedTask.completed } : task
