@@ -67,7 +67,7 @@ const LoginPage = () => {
       <div className="flex flex-col items-center justify-center">
         <button
           type="submit"
-          onClick={() => redirect('/registro')}
+          onClick={() => router.push('/registro')}
           className="w-full bg-transparent outline outline-1 outline-[#6699FF] text-[#6699FF] py-3 rounded-lg hover:bg-[#6699FF] hover:text-white transition cursor-pointer"
         >
           Sign Up

@@ -53,10 +53,10 @@ export default function Home() {
           </div>
 
           <div className="flex flex-col gap-4 w-1/2">
-            <button onClick={() => redirect("/registro")} className="block bg-blue-500 text-white rounded py-2 cursor-pointer">
+            <button onClick={() => redirect("/registro")} className="block bg-indigo-500 text-white rounded-[8px] py-2 cursor-pointer transition-colors duration-400 hover:bg-indigo-600">
               Get Started
             </button>
-            <button onClick={() => redirect("/login")} className="bg-white text-indigo-500 rounded-[8px] py-2 border cursor-pointer  ">
+            <button onClick={() => redirect("/login")} className="bg-white text-indigo-500 rounded-[8px] py-2 border cursor-pointer transition-colors duration-400 hover:bg-gray-300">
               Login
             </button>
           </div>

@@ -7,9 +7,9 @@ import { useRouter } from "next/navigation";
 const ProfilePage = () => {
   const [user, setUser] = useState(null);
   const router = useRouter();
+  const userId = sessionStorage.getItem("userId");
 
   useEffect(() => {
-    const userId = sessionStorage.getItem("userId");
 
     if (!userId) {
       router.push("/login");

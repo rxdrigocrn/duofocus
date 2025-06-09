@@ -49,7 +49,7 @@ const ProfileForm = ({ user }) => {
 
     const handleUpdate = async (data) => {
         try {
-            await updateItem(`/users`, user?.id, data);
+            await updateItem('/users', user?.id, data);
             console.log('User updated successfully:', data);
         } catch (error) {
             console.error('Error updating user:', error);
@@ -77,7 +77,7 @@ const ProfileForm = ({ user }) => {
             <div className="flex items-center justify-between gap-4 mb-6">
                 <div className="flex items-center gap-4">
                     <img
-                        src="https://via.placeholder.com/60"
+                        src="/perfil.jpg"
                         alt="Avatar"
                         className="w-16 h-16 rounded-full object-cover border-2 border-[#6699FF]"
                     />

@@ -38,34 +38,34 @@ const Page = () => {
             getHistoric();
         } catch (err) {
             console.error(err);
-            alert('Erro ao desmarcar tarefa como concluída.');
+            alert('Error unmarking task as completed.');
         }
     };
     return (
         <div className='min-h-[calc(100vh-82px)] flex flex-col items-center gap-7 py-10 px-4'>
-            <h1 className='text-2xl font-bold text-white'>Histórico de Tarefas</h1>
+            <h1 className='text-2xl font-bold text-white'>Task History</h1>
 
             <div className="w-full max-w-4xl overflow-x-auto">
                 <table className="min-w-full divide-y divide-gray-200 shadow-sm rounded-lg overflow-hidden">
                     <thead className="bg-gray-50">
                         <tr>
                             <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Descrição
+                                Description
                             </th>
                             <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Data
+                                Date
                             </th>
                             <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Última Conclusão
+                                Last Completion
                             </th>
                             <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Tipo
+                                Type
                             </th>
                             <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                 Status
                             </th>
                             <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Ação
+                                Action
                             </th>
                         </tr>
                     </thead>
@@ -90,7 +90,7 @@ const Page = () => {
                                             ? 'bg-green-100 text-green-800'
                                             : 'bg-red-100 text-red-800'
                                             }`}>
-                                            {task.completed ? 'Concluída' : 'Pendente'}
+                                            {task.completed ? 'Completed' : 'Pending'}
                                         </span>
                                     </td>
                                     <td className="px-4 py-4 whitespace-nowrap">
@@ -99,7 +99,7 @@ const Page = () => {
                                                 className="text-blue-500 hover:underline cursor-pointer"
                                                 onClick={() => handleUncomplete(task.id)}
                                             >
-                                                Desmarcar
+                                                Unmark
                                             </button>
                                         ) : (
                                             <span className="text-gray-400">-</span>
@@ -110,7 +110,7 @@ const Page = () => {
                         ) : (
                             <tr>
                                 <td colSpan="6" className="px-4 py-4 text-center text-sm text-gray-500">
-                                    Nenhuma tarefa encontrada no histórico
+                                    No tasks found in history
                                 </td>
                             </tr>
                         )}

@@ -1,10 +1,11 @@
-import React from 'react'
+import React from "react";
 
-function FeedbackText() {
+function FeedbackText({insight}) {
+  
   return (
     <div>
         <h3 className='text-xs text-[#D1D5DB]'>
-         Excellent week! Your mind tasks show outstanding progress, while body activities need a little more attention. Keep up the great work on maintaining this balance for optimal well-being.
+          {insight}
         </h3>
     </div>
   )

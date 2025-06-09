@@ -1,34 +1,90 @@
-'use client';
-import React from 'react'
-import FilterFeedback from '@/components/shared/FilterFeedback';
-import FeedbackCard from '@/components/templates/FeedbackCard';
-import FeedbackTypeCard from '@/components/shared/FeedbackTypeCard';
-import FeedbackText from '@/components/shared/FeedbackText';
-import MedidorDeFelicidade from '@/components/shared/MedidorDeFelicidade';
-import ShareProgressButton from '@/components/shared/ShareProgressButton';
+"use client";
+import React, { useEffect, useState, useRef } from "react";
+import { useRouter } from "next/navigation";
+import axios from "axios";
+import FilterFeedback from "@/components/shared/FilterFeedback";
+import FeedbackCard from "@/components/templates/FeedbackCard";
+import FeedbackTypeCard from "@/components/shared/FeedbackTypeCard";
+import FeedbackText from "@/components/shared/FeedbackText";
+import MedidorDeFelicidade from "@/components/shared/MedidorDeFelicidade";
+import ShareProgressButton from "@/components/shared/ShareProgressButton";
+import { API_BASE_URL } from "@/lib/axios/api";
 
 const Feedback = () => {
+  const [progressData, setProgressData] = useState(null);
+  const userId = sessionStorage.getItem("userId");
+  const token = sessionStorage.getItem("token");
+  const router = useRouter();
+  const feedbackRef = useRef(null);
+
+  useEffect(() => {
+    if (!userId) {
+      router.push("/login");
+      return;
+    }
+
+    const fetchProgress = async () => {
+      try {
+        const today = new Date().toISOString().split('T')[0];
+        const response = await axios.get(
+          `${API_BASE_URL}/users/${userId}/progress`,
+          {
+            params: { data: today },
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
+        setProgressData(response.data);
+        
+      } catch (error) {
+        console.error("Error fetching user progress:", error);
+      }
+    };
+    fetchProgress();
+  }, []);
+
+  if (!progressData) {
+    return (
+      <div className="flex justify-center font-bold text-xl text-center items-center w-full min-h-[calc(100vh-82px)] text-white">
+        No progress to generate feedback...
+      </div>
+    );
+  }
+
+  const {
+    completedGeral,
+    totalGeral,
+    completedMente,
+    totalMente,
+    completedCorpo,
+    totalCorpo,
+    equilibrio,
+    weeklyInsight,
+  } = progressData;
+
+  
   return (
-    <div className='min-h-[calc(100vh-82px)] flex flex-col items-center gap-7 py-10 px-4'>
+    <div 
+    ref={feedbackRef}
+    className="min-h-[calc(100vh-82px)] flex flex-col items-center gap-7 py-10 px-4">
       <FilterFeedback />
 
       <FeedbackCard
         title="Total Progress"
-        value="85%"
+        value={`${(completedGeral/totalGeral)*100}%`}
         content={
           <div className="flex justify-between">
             <FeedbackTypeCard
-              icon={<img src='/mindFeedback.svg' className='w-4' />}
+              icon={<img src="/mindFeedback.svg" className="w-4" />}
               title="Mind Tasks"
-              value="18/20"
-              trendIcon={<img src='/ArrowUpBlue.svg' className='w-5' />}
+              value={`${completedMente}/${totalMente}`}
+              trendIcon={<img src="/ArrowUpBlue.svg" className="w-5" />}
               color="text-[#6699FF]"
             />
             <FeedbackTypeCard
-              icon={<img src='/bodyFeedback.svg' className='w-5' />}
+              icon={<img src="/bodyFeedback.svg" className="w-5" />}
               title="Body Tasks"
-              value="16/20"
-              trendIcon={<img src='/ArrowDownRed.svg' className='w-5' />}
+              value={`${completedCorpo}/${totalCorpo}`}
+              trendIcon={<img src="/ArrowDownRed.svg" className="w-5" />}
               color="text-[#FF6666]"
             />
           </div>
@@ -38,28 +94,25 @@ const Feedback = () => {
       <FeedbackCard
         title="Happiness Meters"
         content={
-          <div className='flex flex-col gap-4'>
-            <MedidorDeFelicidade title="Mind" value={90} />
-            <MedidorDeFelicidade title="Body" value={80} />
-            <MedidorDeFelicidade title="Total" value={85} />
+          <div className="flex flex-col gap-4">
+            <MedidorDeFelicidade title="Mind" value={`${(completedMente/totalMente)*100}`} />
+            <MedidorDeFelicidade title="Body" value={`${(completedCorpo/totalCorpo)*100}`} />
+            <MedidorDeFelicidade title="Total" value={`${(completedGeral/totalGeral)*100}`} />
           </div>
         }
       />
 
-      <FeedbackCard
-        title="Weekly Insight"
-        content={<FeedbackText />}
-      />
+      <FeedbackCard title="Weekly Insight" content={<FeedbackText insight={weeklyInsight}/>}/>
 
-      <ShareProgressButton />
+      <ShareProgressButton data={progressData}/>
 
-      <div className='text-center mt-2'>
-        <h3 className='text-[#9CA3AF] '>
+      <div className="text-center mt-2">
+        <h3 className="text-[#9CA3AF] ">
           "Consistency builds extraordinary results"
         </h3>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Feedback
+export default Feedback;
