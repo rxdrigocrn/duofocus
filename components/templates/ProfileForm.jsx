@@ -6,7 +6,7 @@ import TextInput from '../shared/TextInput';
 import { useForm } from 'react-hook-form';
 import { Pencil, LogOut } from 'lucide-react';
 import ModalDeletarConta from '../shared/ModalDeleteAccount';
-import { updateItem } from '@/services/apiServices';
+import { createItem, deleteItem, updateItem } from '@/services/apiServices';
 import { useRouter } from 'next/navigation';
 
 
@@ -42,10 +42,7 @@ const ProfileForm = ({ user }) => {
         }
     }, [user, reset]);
 
-    const handleDelete = () => {
-        console.log('Account deleted!');
-        setShowModal(false);
-    };
+
 
     const handleUpdate = async (data) => {
         try {
@@ -53,6 +50,18 @@ const ProfileForm = ({ user }) => {
             console.log('User updated successfully:', data);
         } catch (error) {
             console.error('Error updating user:', error);
+        }
+    };
+
+    const handleDeleteAccount = async () => {
+        try {
+            await deleteItem('/users', user?.id);
+            console.log('User deleted successfully');
+            sessionStorage.removeItem('userId');
+            sessionStorage.removeItem('token');
+            router.push('/login');
+        } catch (error) {
+            console.error('Error deleting user:', error);
         }
     };
 
@@ -176,7 +185,7 @@ const ProfileForm = ({ user }) => {
             <ModalDeletarConta
                 isOpen={showModal}
                 onClose={() => setShowModal(false)}
-                onConfirm={handleDelete}
+                onConfirm={handleDeleteAccount}
             />
         </div>
     );

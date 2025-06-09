@@ -7,6 +7,8 @@ import AuthHeader from '@/components/templates/AuthHeader'
 import { useRouter } from 'next/navigation'
 import axios from 'axios'
 import { API_BASE_URL } from '@/lib/axios/api'
+import { toast } from 'react-toastify';
+
 
 const LoginPage = () => {
   const { register, handleSubmit } = useForm()
@@ -17,11 +19,15 @@ const LoginPage = () => {
       const res = await axios.post(`${API_BASE_URL}/auth/login`, data, {
         headers: { 'Content-Type': 'application/json' },
       });
-
+      if (res.status !== 200 ) {
+        toast.error("Login failed. Please check your credentials.");
+        return;
+      }
       sessionStorage.setItem('token', res.data.token);
       sessionStorage.setItem('userId', res.data.id);
       router.push('/home');
     } catch (err) {
+      toast.error("Login failed. Please check your credentials.");
       console.log(err);
     }
   };

@@ -6,17 +6,22 @@ import { useRouter } from "next/navigation";
 
 const ProfilePage = () => {
   const [user, setUser] = useState(null);
+  const [userId, setUserId] = useState(null);
   const router = useRouter();
-  const userId = sessionStorage.getItem("userId");
 
   useEffect(() => {
-
-    if (!userId) {
+    const id = sessionStorage.getItem("userId");
+    if (!id) {
       router.push("/login");
-      return;
+    } else {
+      setUserId(id);
     }
+  }, [router]);
 
+  useEffect(() => {
     const getUserInfo = async () => {
+      if (!userId) return;
+
       try {
         const res = await fetchOne("/users", userId);
         if (!res || !res.nome || !res.email) {
@@ -31,14 +36,14 @@ const ProfilePage = () => {
     };
 
     getUserInfo();
-  }, [router]);
+  }, [userId, router]);
 
   if (!user) {
     return (
       <div className="min-h-[calc(100vh-82px)] flex flex-col items-center justify-between py-10 px-4">
-        <p className="text-white text-center">Carregando informações...</p>;
+        <p className="text-white text-center">Carregando informações...</p>
       </div>
-    )
+    );
   }
 
   return (

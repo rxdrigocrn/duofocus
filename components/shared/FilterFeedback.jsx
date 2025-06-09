@@ -13,13 +13,7 @@ const FilterFeedback = () => {
                 <h3>Weekly</h3>
             </button>
             
-            <button
-                onClick={() => setActiveTab('monthly')}
-                className={`px-5 py-2 rounded-lg transition-colors duration-300 text-white cursor-pointer
-                ${activeTab === 'monthly' ? 'bg-[#6699FF]' : 'bg-transparent'}`}
-            >
-                <h3>Monthly</h3>
-            </button>
+           
         </div>
   )
 }

@@ -6,6 +6,8 @@ import AuthTemplate from '@/components/templates/AuthTemplate'
 import AuthHeader from '@/components/templates/AuthHeader'
 import { API_BASE_URL } from '@/lib/axios/api'
 import { useRouter } from 'next/navigation'
+import { toast } from 'react-toastify';
+
 
 import axios from 'axios'
 
@@ -20,9 +22,15 @@ const RegisterPage = () => {
                     'Content-Type': 'application/json',
                 },
             });
+            if (res.status !== 200) {
+                toast.error("Registration failed. Please check your details.");
+                return;
+            }
+            toast.success("Registration successful! Please log in.");
             console.log(res.data);
             router.push('/login');
         } catch (err) {
+            toast.error("Registration failed. Please check your details.");
             console.log(err);
         }
     }

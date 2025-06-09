@@ -14,7 +14,7 @@ export const createItem = async (resource, data) => {
 };
 
 export const updateItem = async (resource, id, data) => {
-    return await apiFetch("PUT", `${resource}/${id}`, data);
+    return await apiFetch("PATCH", `${resource}/${id}`, data);
 };
 
 export const deleteItem = async (resource, id) => {

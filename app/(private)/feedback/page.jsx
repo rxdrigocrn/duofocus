@@ -12,20 +12,29 @@ import { API_BASE_URL } from "@/lib/axios/api";
 
 const Feedback = () => {
   const [progressData, setProgressData] = useState(null);
-  const userId = sessionStorage.getItem("userId");
-  const token = sessionStorage.getItem("token");
+  const [userId, setUserId] = useState(null);
+  const [token, setToken] = useState(null);
   const router = useRouter();
   const feedbackRef = useRef(null);
 
   useEffect(() => {
-    if (!userId) {
+    const id = sessionStorage.getItem("userId");
+    const tok = sessionStorage.getItem("token");
+
+    if (!id || !tok) {
       router.push("/login");
-      return;
+    } else {
+      setUserId(id);
+      setToken(tok);
     }
+  }, [router]);
+
+  useEffect(() => {
+    if (!userId || !token) return;
 
     const fetchProgress = async () => {
       try {
-        const today = new Date().toISOString().split('T')[0];
+        const today = new Date().toISOString().split("T")[0];
         const response = await axios.get(
           `${API_BASE_URL}/users/${userId}/progress`,
           {
@@ -34,13 +43,13 @@ const Feedback = () => {
           }
         );
         setProgressData(response.data);
-        
       } catch (error) {
         console.error("Error fetching user progress:", error);
       }
     };
+
     fetchProgress();
-  }, []);
+  }, [userId, token]);
 
   if (!progressData) {
     return (
@@ -61,16 +70,16 @@ const Feedback = () => {
     weeklyInsight,
   } = progressData;
 
-  
   return (
-    <div 
-    ref={feedbackRef}
-    className="min-h-[calc(100vh-82px)] flex flex-col items-center gap-7 py-10 px-4">
+    <div
+      ref={feedbackRef}
+      className="min-h-[calc(100vh-82px)] flex flex-col items-center gap-7 py-10 px-4"
+    >
       <FilterFeedback />
 
       <FeedbackCard
         title="Total Progress"
-        value={`${(completedGeral/totalGeral)*100}%`}
+        value={`${(completedGeral / totalGeral) * 100}%`}
         content={
           <div className="flex justify-between">
             <FeedbackTypeCard
@@ -95,19 +104,31 @@ const Feedback = () => {
         title="Happiness Meters"
         content={
           <div className="flex flex-col gap-4">
-            <MedidorDeFelicidade title="Mind" value={`${(completedMente/totalMente)*100}`} />
-            <MedidorDeFelicidade title="Body" value={`${(completedCorpo/totalCorpo)*100}`} />
-            <MedidorDeFelicidade title="Total" value={`${(completedGeral/totalGeral)*100}`} />
+            <MedidorDeFelicidade
+              title="Mind"
+              value={`${(completedMente / totalMente) * 100}`}
+            />
+            <MedidorDeFelicidade
+              title="Body"
+              value={`${(completedCorpo / totalCorpo) * 100}`}
+            />
+            <MedidorDeFelicidade
+              title="Total"
+              value={`${(completedGeral / totalGeral) * 100}`}
+            />
           </div>
         }
       />
 
-      <FeedbackCard title="Weekly Insight" content={<FeedbackText insight={weeklyInsight}/>}/>
+      <FeedbackCard
+        title="Weekly Insight"
+        content={<FeedbackText insight={weeklyInsight} />}
+      />
 
-      <ShareProgressButton data={progressData}/>
+      <ShareProgressButton data={progressData} />
 
       <div className="text-center mt-2">
-        <h3 className="text-[#9CA3AF] ">
+        <h3 className="text-[#9CA3AF]">
           "Consistency builds extraordinary results"
         </h3>
       </div>
